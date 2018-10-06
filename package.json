@@ -1,0 +1,32 @@
+{
+  "name": "js-types-kit",
+  "version": "1.0.0",
+  "description": "A toolkit to work with javascript variable types including runtime types checking",
+  "main": "dist/js-types-kit.js",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "5.5.0",
+    "eslint-config-prettier": "3.0.1",
+    "eslint-plugin-jest": "21.22.0",
+    "eslint-plugin-prettier": "2.6.2",
+    "jest": "^23.5.0",
+    "jest-extended": "^0.8.1",
+    "prettier": "1.14.2",
+    "uglify-es": "3.3.9"
+  },
+  "scripts": {
+    "test": "jest --watchAll --coverage --no-cache --setupTestFrameworkScriptFile=jest-extended --verbose=true --env=jsdom",
+    "pack": "uglifyjs dist/js-types-kit.js --mangle --compress --output dist/js-types-kit.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Viktor286/js-types-kit"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/Viktor286/js-types-kit"
+}
