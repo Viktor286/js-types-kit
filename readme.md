@@ -162,32 +162,29 @@ type.list.NaN; // [NaN]
 type.list.specialVoids; // [null, undefined, NaN]
 ```
 
-To generate large range of several variables types as one array we can use 'type.list.*' as base of iteration for a test.
-Collections (lists) of types could be used separately or all at once with method 'allTypesExcept' which will exclude specific lists.
+To generate large range of several variable types as one array we can use 'type.list.*' as base of iteration for a test.
+Collections of types could be used separately or all at once with method 'allTypesExcept' which will exclude specific lists.
 
 _For more tests examples check out jest test files in dev/__tests___
 
 ```javascript
-// trying to pass generated array to function
-it("arrayRange params 1,5 < 6", () => expect(type.make.arrayRange(1, 5).length).toBeLessThan(6));
-
-// Data collections in data-driven test could save a lot of time provided a huge range of combinations.
+// Data collections in data-driven test could save a lot of time providing a huge range of combinations.
 // In this examples 'jest-each' module used (https://www.npmjs.com/package/jest-each)
 
-// We can iterate test assertions based on values from 'type.list.numbers' array which returns [1, -1, 0, -0, 242, -242]
-// As a step further, it's easy to combine it with 'strings' or 'objects' if needed.
-// 'type.list.allTypesExcept()' returns all collections in kit as one array except specified collections (lists).
-// Data-driven test could effectively cover a lot of possible values for both 'true' and 'false' expected results.
-
-describe("isFloat", () => { // this spec generates about 35 test
-  it("loading isFloat", () => expect(type).toContainKey("isFloat"));
-
-  test.each(type.list.floats)('Try true:', x => expect(type.isFloat(x)).toBeTrue());
+describe("isString", () => { // this spec generates about 35 test
+  it("loading isString", () => expect(type).toContainKey("isString"));
   
-  test.each(type.list.allTypesExcept("floats", "NaN", "specialVoids"))('Try false:', x =>
-    expect(type.isFloat(x)).toBeFalse()
-  );
+  // Data-driven test could effectively cover a lot of possible values for both 'true' and 'false' expected results.
+ 
+  // We can iterate test assertions based on values from 'type.list.strings' array which returns
+  // ["0", "-0", "1", "0", "1.242", "-1.422", "$#@*&(", "null", "undefined", "false"]
+  test.each(type.list.strings)("Try false: %s", x => expect(type.isString(x)).toBeTrue());
+  // As a step further, it's easy to combine it with 'strings' or 'objects' if needed: [...type.list.strings, ...type.list.numbers]
+    
+  // 'type.list.allTypesExcept()' returns all collections in a kit as one array except specified collections.
+  test.each(type.list.allTypesExcept("strings"))("Try false: %s", x => expect(type.isString(x)).toBeFalse());
 });
+
 
 ```
 

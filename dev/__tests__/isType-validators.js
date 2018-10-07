@@ -7,7 +7,7 @@ const tryTrueMsg = "Try true: %s";
 describe("isString", () => {
   it("loading isString", () => expect(type).toContainKey("isString"));
   test.each(type.list.allTypesExcept("strings"))(tryFalseMsg, x => expect(type.isString(x)).toBeFalse());
-  test.each([...type.list.strings])(tryTrueMsg, x => expect(type.isString(x)).toBeTrue());
+  test.each(type.list.strings)(tryTrueMsg, x => expect(type.isString(x)).toBeTrue());
 });
 
 describe("isNumber", () => {
