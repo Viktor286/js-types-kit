@@ -8,7 +8,7 @@ Contents:
 * Kit #2 – Strict requirement of the type for a provided variable
 * Kit #3 – Collect type-tests results in a report for debug mode
 * Kit #4 – Generate variables of a specific type for random tests
-* Kit #5 – Provide a sets of the specific type for data-driven tests
+* Kit #5 – Provide a collection of the specific type for data-driven tests
 
 &nbsp;
 
@@ -63,15 +63,15 @@ if (type.isArray(myArr) || type.isString(myStr)) {
 
 
 &nbsp;
-## Kit #2 – Declares required types which cause an error if fails.
+## Kit #2 – Declares required types which cause an error if fails
 This methods performs strict type verification from the runtime point of view.
 
 It will throw type error in case of the wrong type provided otherwise just return the original variable itself.
 
-This set could be used as an additional runtime testing layer that checks input variables.
+This set could be used as an additional testing layer that checks input variables on runtime.
 This especially important for network applications where input data could differentiate from time to time or could be spoofed.
 
-It also might be considered like 'static types' imitation on runtime.
+It also might be considered like 'static types' behavior imitation on runtime.
 
 ```javascript
 type.is.array(notAnArray); // throws type error and stops the script
@@ -128,7 +128,7 @@ loginMethod(username, password, data, notCriticalString, notCriticalCallback) {
 
 &nbsp;
 ## Kit #3 – Report collection of type checks results
-We also can collect a report of variables test results for debug purpose. So at the end of the script session we could monitor some type errors.
+We also can collect a report of variables test results for debug purpose. So at the end of the script session we could monitor type errors.
 ```javascript
 type.report.array(notAnArray); // saves a result in a report
 type.report.string(myString); // saves a result in a report
@@ -140,8 +140,7 @@ showValidationReport('errors-only'); // displays a report with 'errors-only' in 
 
 &nbsp;
 ## Kit #4 – Generates a variable of a certain type
-This set of methods generates particular data type variable and pre-defined collections (lists) of values of certain types.
-
+This set of methods generates particular data type variable.
 It could be used in random tests based on data types.
 
 
@@ -159,9 +158,10 @@ type.make.random(); // returns random type: e.g 'string', false, ['array']
 ```
 
 &nbsp;
-## Kit #5 – Provides a sets of the specific type for data-driven tests
+## Kit #5 – Provides a collection of the specific type for data-driven tests
 
-To use a collection of specific type variables as one array we can use 'type.list.*' as a base of iteration for a test.
+To get a collection of pre-defined specific type variables as one array we can use 'type.list.*' getter
+and use the result as a base of iteration for a test.
 
 ```javascript
 // Get the collection (list as an array) of predefined type's values that could be useful in data-driven tests.
