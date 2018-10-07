@@ -3,7 +3,7 @@
 
 A set of semantic methods which intend to make work with javascript variable types faster and simpler.
 
-It's kind of a tricky topic about type detection in javascript and it still there is no consistent interface for that daily routine task.
+It's kind of a tricky topic about type detection in javascript and still there is no consistent interface for that daily routine task.
 (stackoverflow cases: [string](https://stackoverflow.com/a/9436948/4820094), [number](https://stackoverflow.com/a/8935649/4820094), [object](https://stackoverflow.com/a/8511332/4820094), [empty object](https://stackoverflow.com/a/32108184/4820094), [function](https://stackoverflow.com/a/7356528/4820094), [numeric](https://stackoverflow.com/questions/9716468/pure-javascript-a-function-like-jquerys-isnumeric), [float](https://stackoverflow.com/a/3886106/4820094), [bool](https://stackoverflow.com/a/28814615/4820094)).
 
 It's interesting situation about all that confusion because the interpreter definitely knows variable type when typeError executes.
@@ -11,13 +11,13 @@ It's interesting situation about all that confusion because the interpreter defi
 ### Installation
 _ES6 used_
 
-Web-page: Copy 'dist/js-types-kit.min.js' in your js directory and include script into page.
+Web-page: Copy 'dist/js-types-kit.min.js' in your .js directory and include script into page.
 It will set a global variable 'type' to provide access to working methods globally.
 ```javascript
 <script src="js-types-kit.min.js"></script>
 ```
 
-Node: npm i js-types-kit -DE
+Node: npm install js-types-kit
 ```javascript
 const type = require("../dist/js-types-kit");
 ```
@@ -26,7 +26,7 @@ const type = require("../dist/js-types-kit");
 &nbsp;
 _* further methods examples located in one short js file at docs/usage-examples.js_
 
-
+&nbsp;
 ## Kit #1 – Basic type check with 'type.isType' semantic
 Set of methods returns bool test response.
 
@@ -153,6 +153,33 @@ test.each(type.list.allTypesExcept("numbers", "booleans", "NaN", "specialVoids")
 });
 });
 
+```
+
+```javascript
+// Kit #4 methods list. All params has default values in empty case. Useful in random tests.
+type.make.string(); // c4sy9
+type.make.stringLong(); // c4sy9 c4 c4sy9c4sy9 c4 c4sy9
+type.make.number(-10, 10); // -0.3635977789198641
+type.make.int(-10, 10); // 4
+type.make.float(-10, 10); // 6.805221193506257
+type.make.boolean(); // false
+type.make.array(); // [ -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+type.make.arrayRange(-10, 10); // [ -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+type.make.random(); // returns random type: e.g 'string', false, ['array']
+
+// Get the collection (list as array) of predefined type's values that could be useful in data-driven tests.
+type.list.numbers; // [1, -1, 0, -0, 242, -242]
+type.list.ints; // [1, -1, 0, 1.0, -1.0, -0]
+type.list.floats; // [1.42, -1.42]
+type.list.strings; // ["0", "-0", "1", "0", "1.242", "-1.422", "$#@*&(", "null", "undefined", "false"]
+type.list.functions; // [emptyFunction, simpleFunction]
+type.list.objects; // [emptyObject, simpleObject]
+type.list.arrays; // [emptyArray, simpleArray]
+type.list.booleans; // [false, true]
+type.list.null; // [null]
+type.list.undefined; // [undefined]
+type.list.NaN; // [NaN]
+type.list.specialVoids; // [null, undefined, NaN]
 ```
 
 Hopefully 'js-types-kit' speed up type control workflow and add additional testing layer in the system.
