@@ -11,7 +11,7 @@ It's interesting situation about all that confusion because the interpreter defi
 ### Installation
 _ES6 used_
 
-Web-page: Copy 'dist/js-types-kit.min.js' in your .js directory and include script into page.
+Web-page: copy 'dist/js-types-kit.min.js' in your javascript directory and include script into page.
 It will set a global variable 'type' to provide access to working methods globally.
 ```javascript
 <script src="js-types-kit.min.js"></script>
@@ -24,11 +24,11 @@ const type = require("../dist/js-types-kit");
 
 
 &nbsp;
-_* further methods examples located in one short js file at docs/usage-examples.js_
+_* further methods examples located in one short .js file at docs/usage-examples.js_
 
 &nbsp;
 ## Kit #1 – Basic type check with 'type.isType' semantic
-Set of methods returns bool test response.
+Set of methods returns bool test result.
 
 ```javascript
 // Set #1 methods. Simple type testing in one place.
@@ -143,6 +143,7 @@ _For more tests examples check out jest test files in dev/__tests___
 it("arrayRange params 1,5 < 6", () => expect(type.make.arrayRange(1, 5).length).toBeLessThan(6));
 
 // data collections in data-driven test could save a lot of time provided a huge range combination test.
+// jest-each used (https://www.npmjs.com/package/jest-each)
 describe("data-driven-tests false", () => {
 test.each(type.list.allTypesExcept("numbers", "booleans", "NaN", "specialVoids"))(tryFalseMsg, () => {
   try {
