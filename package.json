@@ -1,6 +1,6 @@
 {
   "name": "js-types-kit",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A toolkit to work with javascript variable types including runtime types checking",
   "keywords": ["test","type", "generate", "verify", "check", "verification", "types"],
   "main": "dist/js-types-kit.js",

@@ -4,18 +4,20 @@
 js-types-kit is a set of semantic methods which are meant to make work with javascript variable types faster and simpler.
 
 Contents:
-1. Bool verification of variable type
-2. Strict requirement of the type for a provided variable
-3. Collect type-tests results in a report for debug mode
-4. Generate variables of a specific type for random tests
-5. Provide a sets of the specific type for data-driven tests
+* Kit #1 – Bool verification of variable type
+* Kit #2 – Strict requirement of the type for a provided variable
+* Kit #3 – Collect type-tests results in a report for debug mode
+* Kit #4 – Generate variables of a specific type for random tests
+* Kit #5 – Provide a sets of the specific type for data-driven tests
+
+&nbsp;
 
 It's kind of a tricky topic about type workflow and type verification in javascript and still there is no consistent interface for that daily routine task.
 Stackoverflow cases: [string](https://stackoverflow.com/a/9436948/4820094), [number](https://stackoverflow.com/a/8935649/4820094), [object](https://stackoverflow.com/a/8511332/4820094), [empty object](https://stackoverflow.com/a/32108184/4820094), [function](https://stackoverflow.com/a/7356528/4820094), [numeric](https://stackoverflow.com/questions/9716468/pure-javascript-a-function-like-jquerys-isnumeric), [float](https://stackoverflow.com/a/3886106/4820094), [bool](https://stackoverflow.com/a/28814615/4820094) and so on.
 
 This library is an experiment toolkit of methods which dedicated to cover some aspects of 'types control' issues which appear during daily work.
 
-BTW, it's an interesting situation about javascript types confusion because the interpreter definitely knows variable type when typeError executes.
+BTW, it's an interesting situation about javascript types confusion because the interpreter definitely knows variable type when TypeError executes.
 
 ### Installation
 _ES6 used_
@@ -26,11 +28,10 @@ It will set a global variable 'type' to provide access to working methods global
 <script src="js-types-kit.min.js"></script>
 ```
 
-Node: npm install js-types-kit
+Node: `npm install js-types-kit`
 ```javascript
 const type = require("js-types-kit");
 ```
-
 
 &nbsp;
 _* further methods examples located in one short .js file at docs/usage-examples.js_
