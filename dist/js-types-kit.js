@@ -154,7 +154,9 @@ const type = {
 
   make: {
     /**
-     * @return {number}
+     * @param from
+     * @param to
+     * @returns {number}
      */
     number(from = -999999, to = 999999) {
       type.is.number(from);
@@ -163,9 +165,11 @@ const type = {
       from > to ? (from = to) : null;
       return Math.random() * (from - to) + to;
     },
-
+  
     /**
-     * @return {number}
+     * @param from
+     * @param to
+     * @returns {number}
      */
     int(from = -999999, to = 999999) {
       type.is.int(from);
@@ -174,9 +178,11 @@ const type = {
       from > to ? (from = to) : null;
       return Math.floor(Math.random() * (from - to + 1)) + to;
     },
-
+  
     /**
-     * @return {number}
+     * @param from
+     * @param to
+     * @returns {*|number}
      */
     float(from = -999999, to = 999999) {
       // can't store float with .0, js stores Int in case of .0
@@ -186,9 +192,11 @@ const type = {
       const float = this.number(from, to);
       return type.isInt(float) ? float + 0.1 : float;
     },
-
+  
     /**
-     * @return {string}
+     * @param from
+     * @param to
+     * @returns {string}
      */
     string(from = 3, to = 5) {
       type.is.int(from);
@@ -204,9 +212,10 @@ const type = {
         .slice(2)
         .substr(0, this.int(from, to));
     },
-
+  
     /**
-     * @return {string}
+     * @param wordsAmount
+     * @returns {string}
      */
     stringLong(wordsAmount = 7) {
       type.is.int(wordsAmount);
@@ -221,23 +230,27 @@ const type = {
       }
       return str.trim();
     },
-
+  
     /**
-     * @return {boolean}
+     * @returns {boolean}
      */
     boolean() {
       return Math.random() >= 0.5;
     },
-
+  
     /**
-     * @return {array}
+     * @param from
+     * @param to
+     * @returns {*|Array}
      */
     array(from, to) {
       return this.arrayRange(from, to);
     },
-
+  
     /**
-     * @return {array}
+     * @param from
+     * @param to
+     * @returns {number[]}
      */
     arrayRange(from = 0, to = 0) {
       type.is.int(from);
@@ -254,9 +267,9 @@ const type = {
         .fill(0)
         .map((e, i) => i + from);
     },
-
+  
     /**
-     * @return {any}
+     * @returns {*}
      */
     random() {
       const generateMethods = Object.keys(this);

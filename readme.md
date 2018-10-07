@@ -41,17 +41,17 @@ _* further methods examples located in one short .js file at docs/usage-examples
 Set of methods returns a bool test result.
 
 ```javascript
-// Set #1 methods. Simple type testing in one place.
-type.isString("1"); // true
-type.isNumber(1); // true
-type.isInt(2); // true
-type.isFloat(3.4); // true
-type.isBoolean(true); // true
-type.isArray(["array"]); // true
-type.isFunction(function() {}); // true
-type.isObject({ field: 1 }); // true
-type.isNull(null); // true
-type.isUndefined(undefined); // true
+// Kit #1 methods. Simple type testing in one place.
+type.isString("1"); // this is true like all below
+type.isNumber(1);
+type.isInt(2);
+type.isFloat(3.4); 
+type.isBoolean(true); 
+type.isArray(["array"]); 
+type.isFunction(function() {}); 
+type.isObject({ field: 1 });
+type.isNull(null);
+type.isUndefined(undefined);
 ```
 
 It could be used for simple exams in conditions.
@@ -84,10 +84,10 @@ try{
 }
 ```
 ```javascript
-// Set #2 methods list.
+// Kit #2 methods list pretty similar to Kit #1.
 type.is.string("1"); // 'type.is.' is an alias of similar method 'type.strict'
 type.is.number(1); // returns origin input
-type.is.int(2);
+type.is.int(2); // would throw new error if was a string "2"
 type.is.float(3.4);
 type.is.boolean(true);
 type.is.array(["array"]);
@@ -130,6 +130,7 @@ loginMethod(username, password, data, notCriticalString, notCriticalCallback) {
 ## Kit #3 – Report collection of type checks results
 We also can collect a report of variables test results for debug purpose. So at the end of the script session we could monitor type errors.
 ```javascript
+// Kit #3 uses all methods of Kit #1
 type.report.array(notAnArray); // saves a result in a report
 type.report.string(myString); // saves a result in a report
 type.report.float(myFloat); // saves a result in a report
@@ -145,14 +146,15 @@ It could be used in random tests based on data types.
 
 
 ```javascript
-// Kit #4 methods list. All params have default values. Could be useful in random tests.
-type.make.string(); // c4sy9
-type.make.stringLong(); // c4sy9 c4 c4sy9c4sy9 c4 c4sy9
+// Kit #4 methods list is different from 1-3 Kits.
+// All params except 'type.make.boolean' and 'type.make.random' expects params and have default values.
+type.make.string(3,5); // c4sy9
+type.make.stringLong(7); // c4sy9 c4 c4sy9c4sy9 c4 c4sy9
 type.make.number(-10, 10); // -0.3635977789198641
 type.make.int(-10, 10); // 4
 type.make.float(-10, 10); // 6.805221193506257
 type.make.boolean(); // false
-type.make.array(); // [ -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+type.make.array(); // alias for 'type.make.arrayRange'
 type.make.arrayRange(-10, 10); // [ -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 type.make.random(); // returns random type: e.g 'string', false, ['array']
 ```
