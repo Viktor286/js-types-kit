@@ -53,4 +53,4 @@ type.list.undefined; // [undefined]
 type.list.NaN; // [NaN]
 type.list.specialVoids; // [null, undefined, NaN]
 
-// TODO: type.report
+// TODO: add type.report examples

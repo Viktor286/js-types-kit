@@ -4,7 +4,7 @@ const type = {
   },
 
   isNumber(v) {
-    return typeof v === "number" || v instanceof Number;
+    return (!isNaN(v) && typeof v === "number") || v instanceof Number;
   },
 
   isInt(v) {
@@ -16,7 +16,7 @@ const type = {
   },
 
   isBoolean(v) {
-    return typeof v === "boolean";
+    return typeof v === typeof true;
   },
 
   isArray(v) {
@@ -24,7 +24,8 @@ const type = {
   },
 
   isFunction(v) {
-    return typeof v === "function";
+    // return typeof v === "function";
+    return v && {}.toString.call(v) === "[object Function]";
   },
 
   isObject(v) {
@@ -39,7 +40,13 @@ const type = {
     return v === undefined;
   },
 
+  isNumeric(n) {
+    // TODO: *new integration
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  },
+
   isEmpty(v) {
+    // TODO: *new integration
     if (this.isArray(v) || this.isString(v)) {
       return v.length === 0;
     } else if (this.isObject(v)) {
