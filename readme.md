@@ -141,7 +141,7 @@ showValidationReport('errors-only'); // displays a report with 'errors-only' in 
 ## Kit #4 – Generates a variable of a certain type
 This set of methods generates particular data type variable and pre-defined collections (lists) of values of certain types.
 
-It could be used in automated data-driven tests based on data types.
+It could be used in random tests based on data types.
 
 
 ```javascript
@@ -160,7 +160,7 @@ type.make.random(); // returns random type: e.g 'string', false, ['array']
 &nbsp;
 ## Kit #5 – Provides a sets of the specific type for data-driven tests
 
-To use a range of several variable types as one array we can use 'type.list.*' as a base of iteration for a test.
+To use a collection of specific type variables as one array we can use 'type.list.*' as a base of iteration for a test.
 
 ```javascript
 // Get the collection (list as an array) of predefined type's values that could be useful in data-driven tests.
@@ -191,11 +191,13 @@ describe("isString", () => { // this spec generates about 35 test
  
   // We can iterate test assertions based on values from 'type.list.strings' array which returns
   // ["0", "-0", "1", "0", "1.242", "-1.422", "$#@*&(", "null", "undefined", "false"]
+  // All of the have to be true.
   test.each(type.list.strings)("Try true: %s", x => expect(type.isString(x)).toBeTrue());
-  // As a step further, it's easy to combine 'strings' with 'objects' if needed with concat.
+  // As a step further, it's easy to combine 'numbers' with 'objects' collection with concat, if needed.
     
   // 'type.list.allTypesExcept' returns all collections in a kit as one array except specified collections.
   test.each(type.list.allTypesExcept("strings"))("Try false: %s", x => expect(type.isString(x)).toBeFalse());
+  // All of these definitely should be false.
 });
 ```
 
