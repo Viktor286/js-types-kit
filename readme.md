@@ -1,12 +1,21 @@
 
 # Javascript types toolkit
 
-js-types-kit is a set of semantic methods which intend to make work with javascript variable types faster and simpler.
+js-types-kit is a set of semantic methods which are meant to make work with javascript variable types faster and simpler.
 
-Problem: It's kind of a tricky topic about type detection in javascript and still there is no consistent interface for that daily routine task.
-Stackoverflow cases: [string](https://stackoverflow.com/a/9436948/4820094), [number](https://stackoverflow.com/a/8935649/4820094), [object](https://stackoverflow.com/a/8511332/4820094), [empty object](https://stackoverflow.com/a/32108184/4820094), [function](https://stackoverflow.com/a/7356528/4820094), [numeric](https://stackoverflow.com/questions/9716468/pure-javascript-a-function-like-jquerys-isnumeric), [float](https://stackoverflow.com/a/3886106/4820094), [bool](https://stackoverflow.com/a/28814615/4820094).
+Contents:
+1. Bool verification of variable type
+2. Strict requirement of the type for a provided variable
+3. Collect type-tests results in a report for debug mode
+4. Generate variables of a specific type for random tests
+5. Provide a sets of the specific type for data-driven tests
 
-It's an interesting situation about all that confusion because the interpreter definitely knows variable type when typeError executes.
+It's kind of a tricky topic about type workflow and type verification in javascript and still there is no consistent interface for that daily routine task.
+Stackoverflow cases: [string](https://stackoverflow.com/a/9436948/4820094), [number](https://stackoverflow.com/a/8935649/4820094), [object](https://stackoverflow.com/a/8511332/4820094), [empty object](https://stackoverflow.com/a/32108184/4820094), [function](https://stackoverflow.com/a/7356528/4820094), [numeric](https://stackoverflow.com/questions/9716468/pure-javascript-a-function-like-jquerys-isnumeric), [float](https://stackoverflow.com/a/3886106/4820094), [bool](https://stackoverflow.com/a/28814615/4820094) and so on.
+
+This library is an experiment toolkit of methods which dedicated to cover some aspects of 'types control' issues which appear during daily work.
+
+BTW, it's an interesting situation about javascript types confusion because the interpreter definitely knows variable type when typeError executes.
 
 ### Installation
 _ES6 used_
@@ -53,7 +62,7 @@ if (type.isArray(myArr) || type.isString(myStr)) {
 
 
 &nbsp;
-## Kit #2 – Declares required types which cause an error if it fails.
+## Kit #2 – Declares required types which cause an error if fails.
 This methods performs strict type verification from the runtime point of view.
 
 It will throw type error in case of the wrong type provided otherwise just return the original variable itself.
@@ -146,7 +155,14 @@ type.make.boolean(); // false
 type.make.array(); // [ -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 type.make.arrayRange(-10, 10); // [ -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 type.make.random(); // returns random type: e.g 'string', false, ['array']
+```
 
+&nbsp;
+## Kit #5 – Provides a sets of the specific type for data-driven tests
+
+To use a range of several variable types as one array we can use 'type.list.*' as a base of iteration for a test.
+
+```javascript
 // Get the collection (list as an array) of predefined type's values that could be useful in data-driven tests.
 type.list.numbers; // [1, -1, 0, -0, 242, -242]
 type.list.ints; // [1, -1, 0, 1.0, -1.0, -0]
@@ -161,14 +177,11 @@ type.list.undefined; // [undefined]
 type.list.NaN; // [NaN]
 type.list.specialVoids; // [null, undefined, NaN]
 ```
-
-To use a range of several variable types as one array we can use 'type.list.*' as a base of iteration for a test.
 Collections of types could be used separately or all at once with method 'allTypesExcept' which will exclude specific lists.
 
 _For more tests examples checkout jest test files in dev/__tests___
 
 ```javascript
-// Data collections in the data-driven test could save a lot of time providing a huge range of combinations.
 // In this examples 'jest-each' module used (https://www.npmjs.com/package/jest-each)
 
 describe("isString", () => { // this spec generates about 35 test
@@ -179,13 +192,11 @@ describe("isString", () => { // this spec generates about 35 test
   // We can iterate test assertions based on values from 'type.list.strings' array which returns
   // ["0", "-0", "1", "0", "1.242", "-1.422", "$#@*&(", "null", "undefined", "false"]
   test.each(type.list.strings)("Try true: %s", x => expect(type.isString(x)).toBeTrue());
-  // As a step further, it's easy to combine it with 'strings' or 'objects' if needed: [...type.list.strings, ...type.list.numbers]
+  // As a step further, it's easy to combine 'strings' with 'objects' if needed with concat.
     
   // 'type.list.allTypesExcept' returns all collections in a kit as one array except specified collections.
   test.each(type.list.allTypesExcept("strings"))("Try false: %s", x => expect(type.isString(x)).toBeFalse());
 });
-
-
 ```
 
 Hopefully 'js-types-kit' speed up type control workflow and add an additional testing layer in the system.
