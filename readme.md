@@ -1,10 +1,10 @@
 
 # Javascript types toolkit
 
-A set of semantic methods which intend to make work with javascript variable types faster and simpler.
+js-types-kit is a set of semantic methods which intend to make work with javascript variable types faster and simpler.
 
-It's kind of a tricky topic about type detection in javascript and still there is no consistent interface for that daily routine task.
-(stackoverflow cases: [string](https://stackoverflow.com/a/9436948/4820094), [number](https://stackoverflow.com/a/8935649/4820094), [object](https://stackoverflow.com/a/8511332/4820094), [empty object](https://stackoverflow.com/a/32108184/4820094), [function](https://stackoverflow.com/a/7356528/4820094), [numeric](https://stackoverflow.com/questions/9716468/pure-javascript-a-function-like-jquerys-isnumeric), [float](https://stackoverflow.com/a/3886106/4820094), [bool](https://stackoverflow.com/a/28814615/4820094)).
+Problem: It's kind of a tricky topic about type detection in javascript and still there is no consistent interface for that daily routine task.
+Stackoverflow cases: [string](https://stackoverflow.com/a/9436948/4820094), [number](https://stackoverflow.com/a/8935649/4820094), [object](https://stackoverflow.com/a/8511332/4820094), [empty object](https://stackoverflow.com/a/32108184/4820094), [function](https://stackoverflow.com/a/7356528/4820094), [numeric](https://stackoverflow.com/questions/9716468/pure-javascript-a-function-like-jquerys-isnumeric), [float](https://stackoverflow.com/a/3886106/4820094), [bool](https://stackoverflow.com/a/28814615/4820094).
 
 It's interesting situation about all that confusion because the interpreter definitely knows variable type when typeError executes.
 
@@ -130,31 +130,10 @@ showValidationReport('errors-only'); // displays a report with 'errors-only' in 
 
 &nbsp;
 ## Kit #4 – Generate a variable of certain type
-This set of methods generates particular data type variable and pre-defined collections of values of certain types.
+This set of methods generates particular data type variable and pre-defined collections (lists) of values of certain types.
 
 It could be used in automated data-driven tests based on data types.
 
-Collections could be used separately and altogether excluding specific ones with method 'allTypesExcept'.
-
-_For more tests examples check out jest test files in dev/__tests___
-
-```javascript
-// trying to pass generated array to function
-it("arrayRange params 1,5 < 6", () => expect(type.make.arrayRange(1, 5).length).toBeLessThan(6));
-
-// data collections in data-driven test could save a lot of time provided a huge range combination test.
-// jest-each used (https://www.npmjs.com/package/jest-each)
-describe("data-driven-tests false", () => {
-test.each(type.list.allTypesExcept("numbers", "booleans", "NaN", "specialVoids"))(tryFalseMsg, () => {
-  try {
-    expect(type.make.boolean());
-  } catch (e) {
-    expect(e.name === "TypeError").toBeTrue();
-  }
-});
-});
-
-```
 
 ```javascript
 // Kit #4 methods list. All params has default values in empty case. Useful in random tests.
@@ -181,6 +160,35 @@ type.list.null; // [null]
 type.list.undefined; // [undefined]
 type.list.NaN; // [NaN]
 type.list.specialVoids; // [null, undefined, NaN]
+```
+
+To generate large range of several variables types as one array we can use 'type.list.*' as base of iteration for a test.
+Collections (lists) of types could be used separately or all at once with method 'allTypesExcept' which will exclude specific lists.
+
+_For more tests examples check out jest test files in dev/__tests___
+
+```javascript
+// trying to pass generated array to function
+it("arrayRange params 1,5 < 6", () => expect(type.make.arrayRange(1, 5).length).toBeLessThan(6));
+
+// Data collections in data-driven test could save a lot of time provided a huge range of combinations.
+// In this examples 'jest-each' module used (https://www.npmjs.com/package/jest-each)
+
+// We can iterate test assertions based on values from 'type.list.numbers' array which returns [1, -1, 0, -0, 242, -242]
+// As a step further, it's easy to combine it with 'strings' or 'objects' if needed.
+// 'type.list.allTypesExcept()' returns all collections in kit as one array except specified collections (lists).
+// Data-driven test could effectively cover a lot of possible values for both 'true' and 'false' expected results.
+
+describe("isFloat", () => { // this spec generates about 35 test
+  it("loading isFloat", () => expect(type).toContainKey("isFloat"));
+
+  test.each(type.list.floats)('Try true:', x => expect(type.isFloat(x)).toBeTrue());
+  
+  test.each(type.list.allTypesExcept("floats", "NaN", "specialVoids"))('Try false:', x =>
+    expect(type.isFloat(x)).toBeFalse()
+  );
+});
+
 ```
 
 Hopefully 'js-types-kit' speed up type control workflow and add additional testing layer in the system.
