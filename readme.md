@@ -1,16 +1,31 @@
 
+# Javascript types toolkit
 
-#Javascript types toolkit
+A set of semantic methods which intend to make work with javascript variable types faster and simpler.
 
-A set of semantic methods which intend to make work with javascript variable types more handy.
-
-It's kind of a tricky topic about some type detection in javascript and it still has no consistent interface for that daily routine action.
+It's kind of a tricky topic about type detection in javascript and it still there is no consistent interface for that daily routine task.
 (stackoverflow cases: [string](https://stackoverflow.com/a/9436948/4820094), [number](https://stackoverflow.com/a/8935649/4820094), [object](https://stackoverflow.com/a/8511332/4820094), [empty object](https://stackoverflow.com/a/32108184/4820094), [function](https://stackoverflow.com/a/7356528/4820094), [numeric](https://stackoverflow.com/questions/9716468/pure-javascript-a-function-like-jquerys-isnumeric), [float](https://stackoverflow.com/a/3886106/4820094), [bool](https://stackoverflow.com/a/28814615/4820094)).
 
-It's interesting situation about all that confusion because the interpreter itself definitely knows each variable type when typeError executes.
+It's interesting situation about all that confusion because the interpreter definitely knows variable type when typeError executes.
+
+### Installation
+_ES6 used_
+
+Web-page: Copy 'dist/js-types-kit.min.js' in your js directory and include script into page.
+It will set a global variable 'type' to provide access to working methods globally.
+```javascript
+<script src="js-types-kit.min.js"></script>
+```
+
+Node: npm i js-types-kit -DE
+```javascript
+const type = require("../dist/js-types-kit");
+```
+
 
 &nbsp;
-_*all further methods examples saved in one short js file at docs/usage-examples.js_
+_* further methods examples located in one short js file at docs/usage-examples.js_
+
 
 ## Kit #1 – Basic type check with 'type.isType' semantic
 Set of methods returns bool test response.
@@ -29,7 +44,7 @@ type.isNull(null); // true
 type.isUndefined(undefined); // true
 ```
 
-It could be used for simple exams as conditions.
+It could be used for simple exams in conditions.
 ```javascript
 if (type.isArray(myArr) || type.isString(myStr)) {
   return true;
@@ -44,13 +59,12 @@ This methods performs strict type verification from the runtime point of view.
 It will throw type error in case of wrong type provided otherwise just return the original variable itself.
 
 This set could be used as an additional runtime testing layer that checks input variables.
-
 This especially important for network applications where input data could differentiate from time to time or could be spoofed.
 
-It might be considered like 'static types' imitation on runtime.
+It also might be considered like 'static types' imitation on runtime.
 
 ```javascript
-type.is.array(notAnArray); // throws error and stops the script
+type.is.array(notAnArray); // throws type error and stops the script
 
 // handle type-check fail, logs error and continue the script
 try{
@@ -141,7 +155,6 @@ test.each(type.list.allTypesExcept("numbers", "booleans", "NaN", "specialVoids")
 
 ```
 
-I hope such approach could speed up type control work and add additional testing layer in the system.
+Hopefully 'js-types-kit' speed up type control workflow and add additional testing layer in the system.
 
- 
 
